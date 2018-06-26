@@ -45,6 +45,9 @@ public class PitView extends ViewGroup {
 
     private Point mScreenPoint;
 
+    int mMaxX;
+    int mMaxY;
+
     /**
      * init method called by constructor which is responsible for initializing the points,
      * paint, adding the child views to parent pit view.
@@ -59,17 +62,20 @@ public class PitView extends ViewGroup {
         Display display = ((Activity) mContext).getWindowManager().getDefaultDisplay();
         display.getSize(mScreenPoint);
 
+        mMaxX = mScreenPoint.x;
+        mMaxY = mScreenPoint.y;
+
         mPointView1 = new PointView(mContext);
         mPointView2 = new PointView(mContext);
         mPointView3 = new PointView(mContext);
         mPointView4 = new PointView(mContext);
         mPointView5 = new PointView(mContext);
 
-        mPointView1.setPoint(mContext, 200, 200);
-        mPointView2.setPoint(mContext, 300, 350);
-        mPointView3.setPoint(mContext, 400, 400);
-        mPointView4.setPoint(mContext, 600, 550);
-        mPointView5.setPoint(mContext, 850, 1000);
+        mPointView1.setPoint(mContext, mMaxX/4, mMaxY/6);
+        mPointView2.setPoint(mContext, (float) (mMaxX/3.2), (float) (mMaxY/4));
+        mPointView3.setPoint(mContext, (float) (mMaxX/1.7), (float) (mMaxY/3));
+        mPointView4.setPoint(mContext, (float) (mMaxX/1.6), (float) (mMaxY/2.2));
+        mPointView5.setPoint(mContext, (float) (mMaxX/1.5), (float) (mMaxY/1.8));
 
         addView(mPointView1);
         addView(mPointView2);
@@ -138,11 +144,8 @@ public class PitView extends ViewGroup {
 
         Log.d(TAG, "Adding point at origin");
 
-        int maxX = mScreenPoint.x;
-        int maxY = mScreenPoint.y;
-
         PointView originPointView = new PointView(mContext);
-        originPointView.setPoint(mContext, maxX / 2, maxY / 2);
+        originPointView.setPoint(mContext, mMaxX / 2, mMaxY / 2);
 
         mPointsViewList.add(originPointView);
 
